@@ -1,13 +1,16 @@
 import express, { Request, Response } from "express";
+import { config } from "dotenv";
+import ConnectMongoDB from "./database/Mongoose";
+import userRouter from "./routers/user.router";
 
 const app = express();
-app.use(express.json());
-app.get("/test", (req: Request, res: Response) => {
-  return res.json({
-    message: "test",
-  });
+config({
+  path: ".env",
 });
+app.use(express.json());
+app.use("/api/my/user", userRouter);
 
-app.listen(8000, () => {
-  console.log(`Backend server running on http://localhost:8000`);
+ConnectMongoDB();
+app.listen(process.env.PORT, () => {
+  console.log(`Backend server running on http://localhost:${process.env.PORT}`);
 });
