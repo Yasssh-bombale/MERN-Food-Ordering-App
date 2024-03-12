@@ -1,6 +1,7 @@
 import express from "express";
 import {
   createCurrentUser,
+  getCurrentUser,
   updateCurrentUser,
 } from "../controllers/user.controller";
 import { jwtCheck, jwtParse } from "../middleware/auth";
@@ -16,4 +17,5 @@ router.put(
   validateMyUserRequest,
   updateCurrentUser
 );
+router.get("/getCurrentUser", jwtCheck, jwtParse, getCurrentUser);
 export default router;
