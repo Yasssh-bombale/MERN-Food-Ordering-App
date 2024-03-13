@@ -13,7 +13,7 @@ app.use("/api/my/user", userRouter);
 
 // health;
 app.get("/health", (req: Request, res: Response) => {
-  res.send({ message: "Health ok!" });
+  return res.sendStatus(200);
 });
 
 ConnectMongoDB();
