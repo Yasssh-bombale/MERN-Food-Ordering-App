@@ -10,6 +10,7 @@ const handleValidationErrors = async (
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
+
   next();
 };
 
@@ -30,22 +31,20 @@ export const validateMyRestaurantRequest = [
   body("country").notEmpty().withMessage("Country is required"),
   body("deliveryPrice")
     .isFloat({ min: 0 })
-    .withMessage("Delivery price must be positive number"),
+    .withMessage("Delivery price must be a positive number"),
   body("estimatedDeliveryTime")
     .isInt({ min: 0 })
-    .withMessage("Estimated delivery time must be positive number"),
+    .withMessage("Estimated delivery time must be a postivie integar"),
   body("cuisines")
     .isArray()
-    .withMessage("Cuisines must be array")
+    .withMessage("Cuisines must be an array")
     .not()
     .isEmpty()
-    .withMessage("Cuisines array can not be empty"),
-  body("menuItems").isArray().withMessage("menu items must be an array"),
-  body("menuItems.*.name")
-    .notEmpty()
-    .withMessage("menu items name is required"),
+    .withMessage("Cuisines array cannot be empty"),
+  body("menuItems").isArray().withMessage("Menu items must be an array"),
+  body("menuItems.*.name").notEmpty().withMessage("Menu item name is required"),
   body("menuItems.*.price")
     .isFloat({ min: 0 })
-    .withMessage("menu items price is required and must be an positive number"),
+    .withMessage("Menu item price is required and must be a postive number"),
   handleValidationErrors,
 ];

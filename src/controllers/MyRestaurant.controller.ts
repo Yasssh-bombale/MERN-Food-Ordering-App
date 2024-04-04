@@ -28,6 +28,8 @@ export const createMyRestaurant = async (req: Request, res: Response) => {
     return res.status(201).send(restaurant);
   } catch (error) {
     console.log(`ERROR:${error}`);
-    return res.status(500).json({ message: "Something went wrong" });
+    return res
+      .status(500)
+      .json({ message: "ERROR: While creating restaurant" });
   }
 };
