@@ -1,6 +1,9 @@
 import express from "express";
 import multer from "multer";
-import { createMyRestaurant } from "../controllers/MyRestaurant.controller";
+import {
+  createMyRestaurant,
+  getMyRestaurant,
+} from "../controllers/MyRestaurant.controller";
 import { jwtCheck, jwtParse } from "../middleware/auth";
 import { validateMyRestaurantRequest } from "../middleware/validation";
 const router = express.Router();
@@ -21,5 +24,7 @@ router.post(
   jwtParse,
   createMyRestaurant
 );
+
+router.get("/", jwtCheck, jwtParse, getMyRestaurant);
 
 export default router;

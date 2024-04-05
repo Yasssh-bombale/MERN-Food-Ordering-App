@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import Restaurant from "../models/restaurant.model";
 import cloudinary from "cloudinary";
 import mongoose from "mongoose";
@@ -31,5 +31,21 @@ export const createMyRestaurant = async (req: Request, res: Response) => {
     return res
       .status(500)
       .json({ message: "ERROR: While creating restaurant" });
+  }
+};
+
+export const getMyRestaurant = async (req: Request, res: Response) => {
+  try {
+    const restaurant = await Restaurant.findOne({ user: req.userId });
+
+    if (!restaurant) {
+      return res.status(404).json({
+        message: "No restaurant found!",
+      });
+    }
+
+    return res.status(200).json(restaurant);
+  } catch (error) {
+    console.log(error);
   }
 };
