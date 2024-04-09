@@ -1,8 +1,9 @@
 import express, { Request, Response } from "express";
 import { config } from "dotenv";
 import ConnectMongoDB from "./database/Mongoose";
-import userRouter from "./routers/user.router";
+import userRouter from "./routers/user.route";
 import MyRestaurantRouter from "./routers/MyRestaurant.route";
+import restaurantRouter from "./routers/restaurant.route";
 import cors from "cors";
 import { v2 as cloudinary } from "cloudinary";
 
@@ -21,6 +22,8 @@ app.use(cors());
 app.use(express.json());
 app.use("/api/my/user", userRouter);
 app.use("/api/my/restaurant", MyRestaurantRouter);
+app.use("/api/restaurant", restaurantRouter);
+
 // health;
 app.get("/health", (req: Request, res: Response) => {
   return res.sendStatus(200);
