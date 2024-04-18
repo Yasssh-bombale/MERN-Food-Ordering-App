@@ -65,6 +65,6 @@ export const searchRestaurant = async (req: Request, res: Response) => {
 
     return res.status(200).json(response);
   } catch (error) {
-    console.log(error);
+    console.log(`ERROR:IN searchRestaurant CONTROLLER ${error}`);
   }
 };
