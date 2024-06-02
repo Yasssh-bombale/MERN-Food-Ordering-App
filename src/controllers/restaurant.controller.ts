@@ -68,3 +68,19 @@ export const searchRestaurant = async (req: Request, res: Response) => {
     console.log(`ERROR:IN searchRestaurant CONTROLLER ${error}`);
   }
 };
+
+export const getRestaurant = async (req: Request, res: Response) => {
+  try {
+    const { restaurantId } = req.params;
+
+    const restaurant = await Restaurant.findById(restaurantId);
+    if (!restaurant) {
+      return res.status(404).json({ message: "No restaurant found" });
+    }
+
+    return res.json(restaurant);
+  } catch (error) {
+    console.log(`ERROR:IN GET-RESTAURANT-CONTROLLER,${error}`);
+    res.status(500).json("ERROR:IN GET-RESTAURANT-CONTROLLER");
+  }
+};
