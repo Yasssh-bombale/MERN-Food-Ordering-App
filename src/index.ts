@@ -4,6 +4,7 @@ import ConnectMongoDB from "./database/Mongoose";
 import userRouter from "./routers/user.route";
 import MyRestaurantRouter from "./routers/MyRestaurant.route";
 import restaurantRouter from "./routers/restaurant.route";
+import orderRouter from "./routers/OrderRoute";
 import cors from "cors";
 import { v2 as cloudinary } from "cloudinary";
 
@@ -23,6 +24,7 @@ app.use(express.json());
 app.use("/api/my/user", userRouter);
 app.use("/api/my/restaurant", MyRestaurantRouter);
 app.use("/api/restaurant", restaurantRouter);
+app.use("/api/order", orderRouter);
 
 // health;
 app.get("/health", (req: Request, res: Response) => {
